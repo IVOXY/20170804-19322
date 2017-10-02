@@ -1,10 +1,12 @@
 {
-  "portgroups": {
-    "servers": {
-      "vlan": "21"
-    },  
-    "workstations": {
-      "vlan": "22"
-    }
-  }
+  "portgroups": [
+  {
+		"name": "servers",
+		"vlan": "21"
+	},
+	{
+	  "name": "workstations",
+	  "vlan": "22"
+	}
+  ]
 }
