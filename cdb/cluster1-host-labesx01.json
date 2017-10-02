@@ -1,0 +1,47 @@
+{
+  "hostname": "labesx01",
+  "domain": "lab.local",
+  "ntpserver": "us.pool.ntp.org",
+  "enablessh": "TRUE",
+  "gateway": "10.0.1.3",
+  "vswitch": [
+    {
+      "vswitchname": "vSwitch0",
+      "vswitchuplinks": [
+        "vmnic0",
+        "vmnic1"
+        ]
+    },
+    {
+      "vswitchname": "vSwitch1",
+      "vswitchuplinks": [
+        "vmnic2",
+        "vmnic3"
+        ]
+    }
+    ],
+  "vmkernel": [
+    {
+      "vmklabel": "vmk-mgmt-0",
+      "vswitch": "vSwitch0",
+      "ipaddress": "10.0.1.131",
+      "netmask": "255.255.255.0",
+      "tcpipstack": "default"
+    },
+    {
+      "vmklabel": "vmk-nfs-7",
+      "vswitch": "vSwitch1",
+      "ipaddress": "10.0.7.131",
+      "netmask": "255.255.255.0",
+      "tcpipstack": "default"
+    },
+    {
+      "vmklabel": "vmk-vmotion-101",
+      "vswitch": "vSwitch1",
+      "ipaddress": "10.0.101.131",
+      "netmask": "255.255.255.0",
+      "tcpipstack": "vmotion"  
+    }
+    
+    ]
+}
