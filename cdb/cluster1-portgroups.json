@@ -1,0 +1,10 @@
+{
+  "portgroups": {
+    "servers": {
+      "vlan": "21"
+    },  
+    "workstations": {
+      "vlan": "22"
+    }
+  }
+}
