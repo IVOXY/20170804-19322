@@ -1,0 +1,73 @@
+<vSwitchConfig>
+  <vSwitch>
+    <VirtualSwitch>vSwitch0</VirtualSwitch>
+    <ActiveNic>vmnic0, vmnic1</ActiveNic>
+    <StandbyNic>
+    </StandbyNic>
+    <allowPromiscuous>False</allowPromiscuous>
+    <forgedTransmits>False</forgedTransmits>
+    <macChanges>False</macChanges>
+    <LoadBalancingPolicy>LoadBalanceSrcId</LoadBalancingPolicy>
+    <MTU>1500</MTU>
+    <FailbackEnabled>True</FailbackEnabled>
+    <NotifySwitches>True</NotifySwitches>
+    <NetworkFailoverDetectionPolicy>LinkStatus</NetworkFailoverDetectionPolicy>
+  </vSwitch>
+  <vSwitch>
+    <VirtualSwitch>vSwitch1</VirtualSwitch>
+    <ActiveNic>vmnic2, vmnic3</ActiveNic>
+    <StandbyNic>
+    </StandbyNic>
+    <allowPromiscuous>False</allowPromiscuous>
+    <forgedTransmits>False</forgedTransmits>
+    <macChanges>False</macChanges>
+    <LoadBalancingPolicy>LoadBalanceSrcId</LoadBalancingPolicy>
+    <MTU>9000</MTU>
+    <FailbackEnabled>True</FailbackEnabled>
+    <NotifySwitches>True</NotifySwitches>
+    <NetworkFailoverDetectionPolicy>LinkStatus</NetworkFailoverDetectionPolicy>
+  </vSwitch>
+  <Portgroups>
+    <Portgroup Name="Management Network">
+      <vlanId>0</vlanId>
+      <virtualSwitch>vSwitch0</virtualSwitch>
+      <cluster>cluster1</cluster>
+      <cluster>NestedCluster</cluster>
+    </Portgroup>
+    <Portgroup Name="VM Network">
+      <vlanId>0</vlanId>
+      <virtualSwitch>vSwitch0</virtualSwitch>
+      <cluster>cluster1</cluster>
+      <cluster>NestedCluster</cluster>
+    </Portgroup>
+    <Portgroup Name="Web Network">
+      <vlanId>21</vlanId>
+      <virtualSwitch>vSwitch0</virtualSwitch>
+      <cluster>cluster1</cluster>
+    </Portgroup>
+    <Portgroup Name="App Network">
+      <vlanId>31</vlanId>
+      <virtualSwitch>vSwitch0</virtualSwitch>
+      <cluster>cluster1</cluster>
+      <cluster>NestedCluster</cluster>
+    </Portgroup>
+    <Portgroup Name="DB Network">
+      <vlanId>41</vlanId>
+      <VirtualSwitch>vSwitch0</VirtualSwitch>
+      <cluster>cluster1</cluster>
+      <cluster>NestedCluster</cluster>
+    </Portgroup>
+    <Portgroup Name="nfs">
+      <vlanId>7</vlanId>
+      <virtualSwitch>vSwitch1</virtualSwitch>
+      <cluster>cluster1</cluster>
+      <cluster>NestedCluster</cluster>
+    </Portgroup>
+    <Portgroup Name="vmotion">
+      <vlanId>101</vlanId>
+      <virtualSwitch>vSwitch1</virtualSwitch>
+      <cluster>cluster1</cluster>
+      <cluster>NestedCluster</cluster>
+    </Portgroup>
+  </Portgroups>
+</vSwitchConfig>
