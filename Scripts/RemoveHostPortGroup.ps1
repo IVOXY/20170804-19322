@@ -7,6 +7,11 @@ $text = "#text"
 $portGroup = Read-Host -Prompt "Enter the name of the Portgroup to be remove (ex: Management Network)"
 $cluster = Read-Host -Prompt "Enter the name of the cluster for this Portgroup (ex: Cluster1)"
 
+#Connect to the vCenter Instance
+$vcenter = "vcenter01.domain.com"
+connect-viserver $vcenter
+
+
 #Check if Portgroup is still in use
 Write-Host "Checking to see if the Portgroup is still in use..." -foreground "Yellow"
 $getPGVMs = Get-Cluster $cluster | Get-VM | where { ($_ | Get-NetworkAdapter | where {$_.networkname -match $portGroup})}

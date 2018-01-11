@@ -2,6 +2,11 @@
 $sourcedvPort = Read-Host -Prompt "Enter the name of the source dvPortgroup"
 $destPort = Read-Host -Prompt "Enter the name of the destination Portgroup"
 
+#Connect to the vCenter Instance
+$vcenter = "vcenter01.domain.com"
+connect-viserver $vcenter
+
+
 #Get all the VMs on the source dvPortgroup
 Write-Host "Getting all the VMs on the source dvPortgroup" -foreground "Yellow"
 $getVMs = get-vdswitch "dvs-name" | get-vdportgroup $sourcedvPort | Get-VM

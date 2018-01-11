@@ -5,6 +5,11 @@ $cluster = Read-Host -Prompt "Enter the name of the cluster to fix host Virtual 
 $xmlPortgroups = "C:\Users\joshd\Documents\Ivoxy\Lighthouse\cdb\XML\xml-portgroups.xml"
 $xmlconfig = [System.Xml.XmlDocument](Get-Content $xmlPortgroups)
 
+#Connect to the vCenter Instance
+$vcenter = "vcenter01.domain.com"
+connect-viserver $vcenter
+
+
 $checkHosts = Get-Cluster $cluster | get-vmhost
 foreach ($vmhost in $checkHosts)
 	{

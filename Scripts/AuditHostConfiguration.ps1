@@ -11,6 +11,11 @@ $xmlHostParams = [System.Xml.XmlDocument](Get-Content $fileHostParams)
 $xmlDatastores = [System.Xml.XmlDocument](Get-Content $fileDatastores)
 $xmlHostConfig = $xmlHostParams.hostConfig.host | Where name -contains $VMhost
 
+#Connect to the vCenter Instance
+$vcenter = "vcenter01.domain.com"
+connect-viserver $vcenter
+
+
 #Combine the entered ESXi Hostname with the configured domain name
 Write-Host "Creating ESXi Fully Qualified Domain Name" -foreground "Yellow"
 $ESXiHost = $VMhost + "." + $xmlHostParams.hostConfig.commonParams.domainName

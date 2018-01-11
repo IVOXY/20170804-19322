@@ -8,6 +8,10 @@ $cluster = Read-Host -Prompt "Enter the name of the cluster for this Portgroup (
 $xmlPortgroups = "C:\Users\joshd\Documents\Ivoxy\Lighthouse\cdb\XML\xml-portgroups.xml"
 $xmlUpdate = [System.Xml.XmlDocument](Get-Content $xmlPortgroups)
 
+#Connect to the vCenter Instance
+$vcenter = "vcenter01.domain.com"
+connect-viserver $vcenter
+
 #Add the name, VLAN, and Virtual Switch values to the XML file
 Write-Host "Adding Portgroup $name with VLAN Id $vlanId on $virtualSwitch in cluster $cluster to the Config File" -foreground "Yellow"
 
@@ -17,6 +21,8 @@ $newvlanIdAttribute = $newPortgroup.AppendChild($xmlUpdate.CreateElement("vlanId
 $newvlanIdValue = $newvlanIdAttribute.AppendChild($xmlUpdate.CreateTextNode($vlanId));
 $newvirtualSwitchAttribute = $newPortgroup.AppendChild($xmlUpdate.CreateElement("virtualSwitch"));
 $newvirtualSwitchValue = $newvirtualSwitchAttribute.AppendChild($xmlUpdate.CreateTextNode($virtualSwitch));
+$newclusterAttribute = $newPortgroup.AppendChild($xmlUpdate.CreateElement("cluster"));
+$newclusterValue = $newclusterAttribute.AppendChild($xmlUpdate.CreateTextNode($cluster));
 $xmlUpdate.Save($xmlPortgroups)
 
 #Add the new portgroup to the host

@@ -5,6 +5,11 @@ $xmlconfig = [System.Xml.XmlDocument](Get-Content $xmlPortgroups)
 #Input the cluster name to validate Portgroups
 $cluster = Read-Host -Prompt "Enter the name of the cluster to check its Portgroup configuration"
 
+#Connect to the vCenter Instance
+$vcenter = "vcenter01.domain.com"
+connect-viserver $vcenter
+
+
 $checkHosts = Get-Cluster $cluster | get-vmhost
 foreach ($vmhost in $checkHosts)
 	{
@@ -21,39 +26,3 @@ foreach ($vmhost in $checkHosts)
 		If ($configPG.VirtualSwitch -eq $hostPG.VirtualSwitch.name){Write-Host "$pgName is configured correctly on $vmhost" -foreground "Green"} ELSE {Write-Host "$pgName is on the wrong Virtual Switch" -foreground "Red"}
 		}
 	}
-
-$Report = @()
-Get-Cluster $cluster | get-vmhost | %{
-$vmhost = Get-View $_.ID
-$ReportRow = "" | Select-Object Hostname, build
-$ReportRow.Hostname = $vmhost.Name
-$ReportRow.Build = $vmhost.summary.config.product.build
-$Report += $ReportRow
-}
-
-$hostPG = Get-VMHost $VMhost | Get-VirtualPortgroup
-$checkPortgroup = $xmlconfig.vSwitchConfig.Portgroups.portgroup | Where {$_.cluster -eq $cluster}
-
-$Report = @()
-get-cluster $cluster | get-vmhost | %{
-$vmhost = Get-View $_.ID
-$ReportRow = "" | Select-Object Hostname, Current, Desired
-$ReportRow.Hostname = $vmhost.name
-$ReportRow.Current = $hostPG.count
-$ReportRow.Desired = $checkPortgroup.count
-$Report += $ReportRow
-}
-$Report | Sort Hostname
-
-$FormatEnumerationLimit=-1
-$Report = @()
-get-cluster $cluster | get-vmhost | %{
-$vmhost = Get-View $_.ID
-$ReportRow = "" | Select-Object Hostname, Current, Desired
-$ReportRow.Hostname = $vmhost.name
-$ReportRow.Current = $hostPG.name
-$ReportRow.Desired = $checkPortgroup.name
-$Report += $ReportRow
-}
-$Report | Sort Hostname | Format-Table -Wrap
-
