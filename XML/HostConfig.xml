@@ -1,0 +1,232 @@
+<hostConfig>
+  <commonParams>
+    <domainName>domain.local</domainName>
+    <ntpServer1>0.us.pool.ntp.org</ntpServer1>
+    <ntpServer2>1.us.pool.ntp.org</ntpServer2>
+    <dnsServer1>192.168.1.10</dnsServer1>
+    <dnsServer2>192.168.1.11</dnsServer2>
+    <syslogServer>192.168.1.100</syslogServer>
+    <enableSSH>True</enableSSH>
+  </commonParams>
+  <templates>
+    <host>
+      <cluster>
+      </cluster>
+      <vmkernels>
+        <test />
+      </vmkernels>
+    </host>
+    <vmkernels>
+      <vmkernel name="test">
+        <IP>
+        </IP>
+        <subnetMask>
+        </subnetMask>
+        <portGroup>
+        </portGroup>
+        <mtu>
+        </mtu>
+        <vlanId>
+        </vlanId>
+        <virtualSwitch>
+        </virtualSwitch>
+      </vmkernel>
+    </vmkernels>
+  </templates>
+  <hosts>
+    <host name="esxi-6-03.domain.local">
+      <cluster>host</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.33</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk1">
+          <IP>10.0.7.123</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>nfs</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk2">
+          <IP>10.0.101.133</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>dv-vMotion</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>
+          </vlanId>
+          <virtualSwitch>
+          </virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi04.domain.local">
+      <cluster>DataCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.213</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk2">
+          <IP>192.168.10.113</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>new-vsan</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi02.domain.local">
+      <cluster>DataCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.211</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk1">
+          <IP>192.168.10.211</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>vSAN-Network</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi03.domain.local">
+      <cluster>DataCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.212</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk1">
+          <IP>192.168.10.212</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>vSAN-Network</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi01.domain.local">
+      <cluster>MgmtCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.210</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi-6-04.domain.local">
+      <cluster>NestedCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.34</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>0</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk1">
+          <IP>10.0.7.124</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>nfs</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk2">
+          <IP>10.0.101.134</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>vmotion</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>110</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi-6-02.domain.local">
+      <cluster>NestedCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.32</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk1">
+          <IP>10.0.7.122</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>nfs</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk2">
+          <IP>10.0.101.132</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>vmotion</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>110</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+    <host name="esxi-6-01.domain.local">
+      <cluster>NestedCluster</cluster>
+      <vmkernels>
+        <vmkernel name="vmk0">
+          <IP>192.168.2.31</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>Management Network</portGroup>
+          <mtu>9000</mtu>
+          <vlanId>2</vlanId>
+          <virtualSwitch>vSwitch0</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk1">
+          <IP>10.0.7.121</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>nfs</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>10</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+        <vmkernel name="vmk2">
+          <IP>10.0.101.131</IP>
+          <subnetMask>255.255.255.0</subnetMask>
+          <portGroup>vmotion</portGroup>
+          <mtu>1500</mtu>
+          <vlanId>110</vlanId>
+          <virtualSwitch>vSwitch1</virtualSwitch>
+        </vmkernel>
+      </vmkernels>
+    </host>
+  </hosts>
+</hostConfig>
